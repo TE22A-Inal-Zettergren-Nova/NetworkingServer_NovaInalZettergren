@@ -7,7 +7,7 @@ public class NetworkingServer {
         ServerSocket server = null;
         Socket client;
 
-        int portnumber = 1025;
+        int portnumber = 49153;
         if ( args.length >= 1){
             portnumber = Integer.parseInt(args[0]);
         }
