@@ -1,15 +1,13 @@
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 
 public class NetworkingServer {
     public static void main(String[] args) {
         ServerSocket server = null;
         Socket client;
 
-        int portnumber = 1234;
+        int portnumber = 1025;
         if ( args.length >= 1){
             portnumber = Integer.parseInt(args[0]);
         }
@@ -28,7 +26,7 @@ public class NetworkingServer {
                 client = server.accept();
 
                 System.out.println("Connect request is accepted...");
-                String clientHost = client.getInetAdress().getHostAddress();
+                String clientHost = client.getInetAddress().getHostAddress();
                 int clientPort = client.getPort();
                 System.out.println("Client host = " + clientHost + "Client port = " + clientPort);
 
@@ -37,9 +35,8 @@ public class NetworkingServer {
 
                 String msgFromClient = br.readLine();
                 System.out.println("Message recieved from client = " + msgFromClient);
-        }
 
-    }if(msgFromClient != null && ! msgFromClient.equalsIgnoreCase("bye")){
+    if(msgFromClient != null && ! msgFromClient.equalsIgnoreCase("bye")){
             OutputStream clientOut = client.getOutputStream();
             PrintWriter pw = new PrintWriter(clientOut, true);
             String ansMsg = "Hello, " + msgFromClient;
@@ -47,13 +44,19 @@ public class NetworkingServer {
 
         }
 
-        if (msgFromCLient != null && msgFromClient.equalsIgnoreCase("bye")){
+        if (msgFromClient != null && msgFromClient.equalsIgnoreCase("bye")){
             server.close();
 
-            client.close;
+            client.close();
             break;
         }
-    } catch ()
+    } catch ( IOException ie) {
 
+
+            }
+        }
+    }
 }
+
+
 
